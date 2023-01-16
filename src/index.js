@@ -1,10 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+
+//Añadimos bootstrap a nuestro proyecto
+import 'bootstrap/dist/css/bootstrap.css';
+
+// ! Nuestros estilos deben ir siempre debajo de bootstrap para que no los pise.
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = ReactDOM.createRoot(document.getElementById('root')); // root -> es el id que tenemos en el HTML, entonces le decimos que renderice la App en ese id.
 root.render(
   <React.StrictMode>
     <App />
