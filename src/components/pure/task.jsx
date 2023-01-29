@@ -5,7 +5,7 @@ import "../../styles/task.scss";
 import { LEVELS } from "../../models/levels.enum";
 // import { useState } from 'react';
 
-function TaskComponent({ task }) {
+function TaskComponent({ task, complete, deleteTask }) {
   useEffect(() => {
     console.log("Created task");
     return () => {
@@ -47,14 +47,29 @@ function TaskComponent({ task }) {
    */
   function taskCompletedIcon() {
     if (task.completed) {
-      return <i className="bi-toggle-on" style={{ color: "green" }}></i>;
+      return <i onClick={()=>complete(task)} className="bi-toggle-on task-action" style={{ color: "green" }}></i>;
     } else {
-      return <i className="bi-toggle-off" style={{ color: "grey" }}></i>;
+      return <i onClick={()=>complete(task)} className="bi-toggle-off task-action" style={{ color: "grey" }}></i>;
     }
   }
 
+  /**
+   * Los estilos los podemos guardar en constantes como objetos y luego usarlos en los componentes (style={...})
+   * Al usar los className que estan definidos en task.scss, si ya teníamos definido un className dentro del componente,
+   * no podemos agregar 2 className.
+   */
+  const taskCompleted = {
+    color: 'gray',
+    fontWeight: 'bold',
+    textDecoration: 'line-through'
+  }
+  const taskPending = {
+    color: 'tomato',
+    fontWeight: 'bold',
+  }
+
   return (
-    <tr className="fw-normal">
+    <tr className="fw-normal" style={task.completed ? taskCompleted : taskPending}>
       <th>
         <span className="ms-2">{task.name}</span>
       </th>
@@ -77,7 +92,7 @@ function TaskComponent({ task }) {
           <i className="bi-toggle-off" style={{ color: "grey" }}></i>
         )} */}
 
-        <i className="bi-trash" style={{ color: "tomato" }}></i>
+        <i onClick={()=> deleteTask(task)} className="bi-trash task-action" style={{ color: "tomato" }}></i>
         {/* <span>{task.completed ? 'Completado' : 'Pendiente'}</span> */}
       </td>
     </tr>
@@ -85,7 +100,9 @@ function TaskComponent({ task }) {
 }
 
 TaskComponent.propTypes = {
-  task: PropTypes.instanceOf(Task),
+  task: PropTypes.instanceOf(Task).isRequired,
+  complete: PropTypes.func.isRequired,
+  deleteTask: PropTypes.func.isRequired,
 };
 
 export default TaskComponent;

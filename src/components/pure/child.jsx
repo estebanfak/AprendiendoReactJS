@@ -6,8 +6,7 @@ export default function Child({name, send, update}) {
     const nameRef = useRef('');
 
     function pressButton(){
-        const text = messageRef.current.value;
-        alert(`Text in input: ${text}`);
+        alert(`Text in input: ${messageRef.current.value}`);
     }
 
     function pressButtonParams(text) {

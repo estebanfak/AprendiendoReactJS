@@ -9,6 +9,7 @@ import Ejemplo2 from './hooks/Ejemplo2';
 import MiComponenteConContexto from './hooks/Ejemplo3';
 import Ejemplo4 from './hooks/Ejemplo4';
 import Father from './components/container/father';
+import OptionalRender from './components/pure/optionalRender.jsx'
 
 function App() {
   return (
@@ -22,7 +23,7 @@ function App() {
         {/* Llamado al componente de tipo funcion poniendo como parametro name */}
         {/* <GreetingF name={"Esteban"}></GreetingF> */}
 
-        {/* <TaskListComponent></TaskListComponent> */}
+        <TaskListComponent></TaskListComponent>
 
         {/* Ejemplo de uso de Hooks */}
         {/* <Ejemplo1></Ejemplo1> */}
@@ -41,7 +42,11 @@ function App() {
         {/* <GreetingStyled name='Esteban'></GreetingStyled> */}
 
         {/* Gestion de eventos */}
-        <Father></Father>
+        {/* <Father></Father> */}
+
+        {/* Ejemplos de renderizado condicional */}
+
+        {/* <OptionalRender></OptionalRender> */}
       {/* </header> */}
     </div>
   );

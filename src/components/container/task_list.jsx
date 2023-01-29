@@ -32,14 +32,71 @@ function TaskListComponent() {
 
   useEffect(() => {
     console.log("Task state has been modified");
-    setLoading(false);
+    setTimeout(() => {
+      setLoading(false);
+    }, 2000);
     return () => {
       console.log("TaskList component is going to be unmounted");
     };
   }, [tasks]);
 
-  function changeCompleted() {
-    console.log("TODO -> Cambiar estado a una tarea");
+  function completeTask(task) {
+    console.log("Complete this task: ", task);
+    const index = tasks.indexOf(task);
+    const tempTask = [...tasks];
+    tempTask[index].completed = !tempTask[index].completed;
+    //Ahora debemos actualizar el estado del componente con la nueva lista y vamos a actualizar la iteracion de las tareas (tasks) para renderizar las tareas actualizadas
+    setTask(tempTask);
+  }
+
+  function deleteTask(task) {
+    console.log("Tarea eliminada: ", task);
+    const index = tasks.indexOf(task);
+    const tempTask = [...tasks];
+    //Con splice le decimos que queremos eliminar un elemento de la lista, el primer parametro indicamos desde que elemento queremos eliminar y con el segundo parametro
+    //le indicamos cuantos elementos queremos eliminar
+    tempTask.splice(index, 1);
+    setTask(tempTask);
+  }
+
+  function addTask(task) {
+    console.log("Tarea agregada");
+    const tempTask = [...tasks];
+    tempTask.push(task);
+    setTask(tempTask);
+  }
+
+  function TaskTable() {
+    return (
+      <table>
+        <thead>
+          <tr>
+            <th scope="col">Titulo</th>
+            <th scope="col">Descripción</th>
+            <th scope="col">Prioridad</th>
+            <th scope="col">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          {tasks.map((task, index) => {
+            return (
+              <TaskComponent
+                key={index}
+                task={task}
+                complete={completeTask}
+                deleteTask={deleteTask}
+              ></TaskComponent>
+            );
+          })}
+        </tbody>
+      </table>
+    );
+  }
+
+  const loadingStyle = {
+    color: 'grey',
+    fontSize: '30px',
+    fontWeight: 'bold'
   }
 
   return (
@@ -48,34 +105,20 @@ function TaskListComponent() {
         <div className="card">
           {/* Card Header (titulo) */}
           <div className="card-header p-3">
-            <h5>Tus tarea:</h5>
+            <h5>Tus tareas:</h5>
           </div>
+          {/* Card body */}
           <div
             className="card-body"
             data-mdb-perfect-scrollbar="true"
             style={{ position: "relative", height: "400px" }}
           >
-            <table>
-              <thead>
-                <tr>
-                  <th scope="col">Titulo</th>
-                  <th scope="col">Descripción</th>
-                  <th scope="col">Prioridad</th>
-                  <th scope="col">Acciones</th>
-                </tr>
-              </thead>
-              <tbody>
-                {tasks.map((task, index) => {
-                  return (
-                    <TaskComponent key={index} task={task}></TaskComponent>
-                  );
-                })}
-              </tbody>
-            </table>
+          {/* TODO: Agregar spinner */}
+          {loading ? <p style={loadingStyle}>Cargando tareas...</p> : (tasks.length>0 ? <TaskTable></TaskTable> : <div><h3>No hay tareas para mostrar</h3><h4>Por favor crea una tarea</h4></div>)}
           </div>
-          <TaskForm></TaskForm>
         </div>
       </div>
+      <TaskForm add={addTask} length={tasks.length}></TaskForm>
     </div>
   );
 }
