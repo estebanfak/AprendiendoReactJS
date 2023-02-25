@@ -10,6 +10,9 @@ import MiComponenteConContexto from './hooks/Ejemplo3';
 import Ejemplo4 from './hooks/Ejemplo4';
 import Father from './components/container/father';
 import OptionalRender from './components/pure/optionalRender.jsx'
+import LoginFormik from './components/pure/forms/loginFormik';
+import RegisterFormik from './components/pure/forms/registerFormik';
+import TaskFormik from './components/pure/forms/taskFormik';
 
 function App() {
   return (
@@ -47,6 +50,15 @@ function App() {
         {/* Ejemplos de renderizado condicional */}
 
         {/* <OptionalRender></OptionalRender> */}
+
+        {/* Ejemplo de uso de Formik y yup */}
+        {/* <LoginFormik></LoginFormik> */}
+
+        {/* Registro de formik */}
+        {/* <RegisterFormik></RegisterFormik> */}
+
+        {/* Registro de tareas con formik */}
+        {/* <TaskFormik></TaskFormik> */}
       {/* </header> */}
     </div>
   );
