@@ -8,11 +8,13 @@ import 'bootstrap-icons/font/bootstrap-icons.css'
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import AppRouting1 from './AppRouting1';
 
 const root = ReactDOM.createRoot(document.getElementById('root')); // root -> es el id que tenemos en el HTML, entonces le decimos que renderice la App en ese id.
 root.render(
   <React.StrictMode>
-    <App />
+    {/* <App /> */}
+    <AppRouting1></AppRouting1>
   </React.StrictMode>
 );
 

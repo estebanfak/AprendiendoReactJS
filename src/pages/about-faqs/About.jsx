@@ -1,7 +1,7 @@
-import React from "react";
-import {useHistory, useLocation} from 'react-router-dom'
+import React from 'react';
+import { useLocation, useHistory } from 'react-router-dom';
 
-export default function HomePage() {
+export default function About() {
 
   const location = useLocation();
   const history = useHistory();
@@ -22,12 +22,12 @@ export default function HomePage() {
 
   return (
     <div>
-      <h1>HomePage</h1>
-      <div>
-          <button onClick={()=> navigate('/profile')}>Ir a Perfil</button>
+        <h1>About | FAQs</h1>
+        <div>
+          <button onClick={()=> navigate('/')}>Go home</button>
           <button onClick={goBack}>Go back</button>
           <button onClick={goForward}>Go forward</button>
         </div>
     </div>
-  );
-};
+  )
+}

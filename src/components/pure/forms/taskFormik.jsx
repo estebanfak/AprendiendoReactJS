@@ -3,7 +3,6 @@ import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { LEVELS } from '../../../models/levels.enum';
 import { Task } from '../../../models/task.class';
-import { Button } from 'bootstrap';
 
 function TaskFormik({add, length}) {
 
@@ -16,13 +15,11 @@ function TaskFormik({add, length}) {
     const taskSchema = Yup.object().shape({
         nombre: Yup.string().required('El nombre de la tarea es requerido'),
         descripcion: Yup.string().required('La tarea es requerida'),
-        level: Yup.string().oneOf([LEVELS.NORMAL, LEVELS.URGENT, LEVELS.BLOCKING], 'Debes elegir un level')
-        .required('Debes elegir un level')
+        level: Yup.string().oneOf([LEVELS.NORMAL, LEVELS.URGENT, LEVELS.BLOCKING], 'Debes elegir un level').required('Debes elegir un level')
     })
 
     function addTask(param) {
         const task = new Task(param.nombre, param.descripcion, false, param.level);
-        console.log(task)
         add(task);
     }
 
@@ -71,7 +68,6 @@ function TaskFormik({add, length}) {
               <ErrorMessage name='level' component='div' />
             )}
             </Field>
-            
 
             <button type='submit' className='btn btn-success btn-lg ms-2'>{length>0 ? <p>Agregar tarea</p> : <p>Nueva tarea</p>}</button>
             </Form>
